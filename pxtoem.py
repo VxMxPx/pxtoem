@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import os
 
 def is_number(s):
     try:
@@ -29,6 +30,7 @@ base = input('Enter base value in pixels: ')
 base = int(base)
 
 ignore_em = False if input('Ignore em inputs? [Y/n] ').lower() == 'n' else True
+copy_result = False if input('Copy result to clipboard (require xsel)? [Y/n] ').lower() == 'n' else True
 
 while True:
     unit = input('> ')
@@ -37,11 +39,15 @@ while True:
     if not " " in unit:
         # We'll default to 'px' if no unit provided,
         # but only in case of single value input.
-        if is_number(unit): unit = str(unit) + 'px'
-        print(do_convert(unit, base, ignore_em))
+        if is_number(unit) and unit != '0': unit = str(unit) + 'px'
+        result = do_convert(unit, base, ignore_em)
     else:
         units = unit.split(' ')
         stack = []
         for unit in units:
             stack.append(do_convert(unit.strip(), base, ignore_em))
-        print(' '.join([str(item) for item in stack]))
+        result = ' '.join([str(item) for item in stack])
+
+    print(result)
+    if copy_result:
+        os.system('echo "' + result + '" | xsel -ib')
