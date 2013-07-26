@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import os
+import subprocess
 
 def is_number(s):
     try:
@@ -50,4 +50,6 @@ while True:
 
     print(result)
     if copy_result:
-        os.system('echo "' + result + '" | xsel -ib')
+        p1 = subprocess.Popen(['echo', '-n', result], stdout=subprocess.PIPE)
+        p2 = subprocess.Popen(["xsel", "-ib"], stdin=p1.stdout, stdout=subprocess.PIPE)
+        p2.communicate()[0]
