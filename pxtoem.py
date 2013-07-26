@@ -35,6 +35,9 @@ while True:
     if unit.lower() in ['q', 'exit']: exit()
     # We're dealing with list of values!
     if not " " in unit:
+        # We'll default to 'px' if no unit provided,
+        # but only in case of single value input.
+        if is_number(unit): unit = str(unit) + 'px'
         print(do_convert(unit, base, ignore_em))
     else:
         units = unit.split(' ')
