@@ -1,9 +1,14 @@
 pxtoem
 ======
 
+usage: pxtoem [-h] [-i] [-c] base
+
 Simple command-line pixel to em (and vica versa) converter.
 
-After you'll execute the script you'll be prompted to enter base unit number (for example 22px). After that you'll be able to enter number in format: 22px or 4em, which will be converted to opposite unit.
+positional arguments:
+  base          Base numeric value (in px) which will be used for calculation
 
-Script will alos accept multiple values, seperated by spaces.
-
+optional arguments:
+  -h, --help    show this help message and exit
+  -i, --ignore  Ignore em units
+  -c, --copy    Copy result to clipboard (require xsel to be installed)
