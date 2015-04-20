@@ -20,9 +20,9 @@ def do_convert(unit, base, ignore):
     if not is_number(unit): return 'NaN'
 
     if conv_type == 'px':
-        return str("%.2f" % round(float(unit) / base, 2)).rstrip('0.').lstrip('0') + 'em'
+        return str("%.2f" % round(float(unit) / base, 2)).rstrip('0').rstrip('.') + 'em'
     elif not ignore:
-        return str("%.2f" % round(float(unit) * base, 2)).rstrip('0.').lstrip('0') + 'px'
+        return str("%.2f" % round(float(unit) * base, 2)).rstrip('0').rstrip('.') + 'px'
     else:
         return unit + conv_type
 
